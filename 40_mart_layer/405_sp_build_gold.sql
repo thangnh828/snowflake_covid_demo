@@ -28,6 +28,7 @@ BEGIN
         sub_region,
         row_hash
         FROM COVID_DEMO.CURATED.COUNTRY_CLEAN
+        WHERE DATE(ingested_at) = CURRENT_DATE()
     ) s
     ON t.country_id = s.country_id
     WHEN MATCHED AND t.row_hash <> s.row_hash THEN
@@ -63,6 +64,7 @@ BEGIN
         geonameid,
         row_hash
         FROM COVID_DEMO.CURATED.CITY_CLEAN
+        WHERE DATE(ingested_at) = CURRENT_DATE()
     ) s
     ON t.city_id = s.city_id
     WHEN MATCHED AND t.row_hash <> s.row_hash THEN
@@ -101,7 +103,7 @@ BEGIN
         source_file,
         row_hash
         FROM COVID_DEMO.CURATED.COVID_DAILY_CLEAN
-        WHERE report_date IS NOT NULL
+        WHERE DATE(ingested_at) = CURRENT_DATE()
     ) s
     ON t.covid_location_key = s.covid_location_key
     WHEN MATCHED AND t.row_hash <> s.row_hash THEN
