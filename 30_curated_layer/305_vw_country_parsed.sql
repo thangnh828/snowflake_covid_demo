@@ -20,7 +20,6 @@ WITH base AS (
         TRIM(intermediate_region) AS intermediate_region,
         TRIM(region_code) AS region_code,
         TRIM(sub_region_code) AS sub_region_code,
-        TRIM(intermediate_region_code) AS intermediate_region_code,
         SHA2(
             COALESCE(TRIM(name), '') || '|' ||
             COALESCE(TRIM(alpha_2), '') || '|' ||
@@ -31,8 +30,7 @@ WITH base AS (
             COALESCE(TRIM(sub_region), '') || '|' ||
             COALESCE(TRIM(intermediate_region), '') || '|' ||
             COALESCE(TRIM(region_code), '') || '|' ||
-            COALESCE(TRIM(sub_region_code), '') || '|' ||
-            COALESCE(TRIM(intermediate_region_code), ''),
+            COALESCE(TRIM(sub_region_code), ''),
             256
         ) AS row_hash,
 
@@ -60,7 +58,6 @@ SELECT
     iso_3166_2,
     region,
     sub_region,
-    intermediate_region_code,
     row_hash,
     source_file,
     ingested_at
