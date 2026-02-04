@@ -7,5 +7,4 @@ CREATE OR REPLACE TABLE OPS.DQ_RESULTS (
     check_name    STRING,
     status        STRING,
     failed_rows   NUMBER,
-    sample_rows   VARIANT
 );
